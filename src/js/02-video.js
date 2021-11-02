@@ -5,18 +5,14 @@ const player = new Player('vimeo-player');
 
 player.on('timeupdate', throttle(onUpdate, 1000));
 
-function onUpdate (data) {{
-        duration: 61.857
-        percent: 0.049
-        seconds: 3.034
-    }
-    localStorage.setItem("videoplayer-current-time", JSON.stringify(data)); 
+function onUpdate (data) {{}
+    localStorage.setItem("videoplayer-current-time", data.seconds); 
 };
 
 const current = localStorage.getItem("videoplayer-current-time");
-const parsedCurrent = JSON.parse(current);
+// const parsedCurrent = JSON.parse(current);
 
-player.setCurrentTime(parsedCurrent.seconds).then(function(seconds) {   
+player.setCurrentTime(current).then(function(seconds) {   
 }).catch(function(error) {
     switch (error.name) {
         case 'RangeError':
